@@ -59,8 +59,11 @@
           (lambda ()
             (dired-hide-details-mode)))
 	       
-;; Save sessions when closing
+;; Save desktop on close
 (desktop-save-mode 1)
+(desktop-file-name ".emacs.desktop" "~/.emacs.d/")
+
+;; Save history
 (savehist-mode 1)
 
 ;; Make yes/no prompts y/n

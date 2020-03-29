@@ -1,4 +1,4 @@
-;;; package --- summary
+';;; package --- summary
 ;;; Code:
 ;;; Commentary:
 
@@ -88,7 +88,7 @@
   (company-idle-delay 0)
   (company-minimum-prefix-length 1)
   :bind
-  ("C-ä" . company-capf))
+  ("C-ä" . company-complete))
 
 (with-eval-after-load 'company
   (define-key company-active-map (kbd "C-ä") 'company-other-backend))
@@ -104,12 +104,27 @@
 (use-package add-node-modules-path
   :hook ((web-mode rjsx-mode) . add-node-modules-path))
 
-(use-package python
-  :ensure nil
-  :hook (python-mode . lsp)
-  :custom
-  (python-indent-guess-indent-offset-verbose nil)
-  (python-fill-docstring-style 'pep-257-nn))
+;; Python mode
+;; (use-package python
+;;   :ensure nil
+;;   :hook (python-mode . lsp)
+;;   :custom
+;;   (python-indent-guess-indent-offset-verbose nil)
+;;   (python-fill-docstring-style 'pep-257-nn))
+
+(use-package anaconda-mode
+  :ensure t
+  :init (add-hook 'python-mode-hook 'anaconda-mode)
+        ;;(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+  :config (use-package company-anaconda
+            :ensure t
+            :init (add-hook 'python-mode-hook 'anaconda-mode)
+            (eval-after-load "company"
+              '(add-to-list 'company-backends '(company-anaconda :with company-capf)))))
+
+(use-package pyvenv)
+
+(setq python-shell-interpreter "/usr/bin/python3")
 
 ;; Multi cursor config
 (use-package multiple-cursors
@@ -148,6 +163,14 @@
   :bind
   ("M-<up>" . drag-stuff-up)
   ("M-<down>" . drag-stuff-down))
+
+;; Ivy config
+(use-package ivy
+  :config
+  (ivy-mode 1)
+  :custom
+  (ivy-use-virtual-buffers t)
+  (enable-recursive-minibuffers t))
 
 
 ;;; package.el ends here

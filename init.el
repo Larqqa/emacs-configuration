@@ -28,8 +28,10 @@
 (require 'package)
 (setq package-enable-at-startup nil)
 
-(setq package-archives '(("melpa-stable" . "https://stable.melpa.org/packages/")
-			 ("gnu" . "http://elpa.gnu.org/packages/")))
+(setq package-archives
+      '(("melpa" . "http://melpa.org/packages/")
+        ("gnu" . "http://elpa.gnu.org/packages/")))
+
 (package-initialize)
 
 ;; Byte compile warnings off
@@ -46,26 +48,29 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(company-dabbrev-downcase nil t)
+ '(company-dabbrev-downcase nil)
  '(company-idle-align-annotations t t)
- '(company-idle-delay 0 t)
- '(company-minimum-prefix-length 1 t)
- '(company-require-match (quote never) t)
- '(company-tooltip-align-annotations t t)
+ '(company-idle-delay 0)
+ '(company-lsp-cache-candidates t t)
+ '(company-minimum-prefix-length 1)
+ '(company-require-match (quote never))
+ '(company-tooltip-align-annotations t)
  '(doom-modeline-mode t)
- '(flycheck-check-syntax-automatically (quote (save mode-enabled)) t)
- '(lsp-auto-guess-root t t)
+ '(enable-recursive-minibuffers t)
+ '(flycheck-check-syntax-automatically (quote (save mode-enabled)))
+ '(ivy-use-virtual-buffers t)
+ '(lsp-auto-guess-root t)
  '(lsp-io-doc-include-signature t t)
- '(lsp-log-io t t)
+ '(lsp-log-io t)
  '(lsp-prefer-flymake nil t)
  '(lsp-ui-doc-delay 0 t)
  '(lsp-ui-flycheck-enable t t)
  '(lsp-ui-peek-always-show t t)
  '(package-selected-packages
    (quote
-    (benchmark-init dired+ drag-stuff restart-emacs doom-modeline all-the-icons-dired all-the-icons move-text move-lines dired which-key use-package multiple-cursors magit lsp-ui flycheck emmet-mode dap-mode company-lsp centaur-tabs add-node-modules-path)))
- '(python-fill-docstring-style (quote pep-257-nn) t)
- '(python-indent-guess-indent-offset-verbose nil t)
+    (company-anaconda anaconda-mode smex elpy multiple-cursorsinit virtualenvwrapper pyvenv ivy helm icicles benchmark-init dired+ drag-stuff restart-emacs doom-modeline all-the-icons-dired all-the-icons move-text move-lines dired which-key use-package multiple-cursors magit lsp-ui flycheck emmet-mode dap-mode company-lsp centaur-tabs add-node-modules-path)))
+ '(python-fill-docstring-style (quote pep-257-nn))
+ '(python-indent-guess-indent-offset-verbose nil)
  '(restart-emacs-restore-frames t t)
  '(treemacs-resize-icons 15 t))
 (custom-set-faces
