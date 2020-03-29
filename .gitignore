@@ -1,0 +1,14 @@
+
+# Ignore all
+*
+
+# Except self
+!.gitignore
+
+# Except config files
+!config.el
+!init.el
+!package.el
+
+# Except misc
+!README.md
