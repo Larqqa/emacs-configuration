@@ -1,4 +1,4 @@
-';;; package --- summary
+;;; package --- summary
 ;;; Code:
 ;;; Commentary:
 
@@ -105,13 +105,6 @@
   :hook ((web-mode rjsx-mode) . add-node-modules-path))
 
 ;; Python mode
-;; (use-package python
-;;   :ensure nil
-;;   :hook (python-mode . lsp)
-;;   :custom
-;;   (python-indent-guess-indent-offset-verbose nil)
-;;   (python-fill-docstring-style 'pep-257-nn))
-
 (use-package anaconda-mode
   :ensure t
   :init (add-hook 'python-mode-hook 'anaconda-mode)
@@ -171,6 +164,29 @@
   :custom
   (ivy-use-virtual-buffers t)
   (enable-recursive-minibuffers t))
+
+;; Rainbow mode
+(use-package rainbow-mode)
+
+;; Set Rainbow mode on globally
+;;(define-globalized-minor-mode global-rainbow-mode rainbow-mode
+;;  (lambda () (rainbow-mode 1)))
+;;(global-rainbow-mode 1)
+
+;; Add rainbow mode to certain modes
+(defun add-multi-hook (function hooks)
+  "Add a mode to multiple modes."
+  (mapc (lambda (hook)
+          (add-hook hook function))
+        hooks))
+
+(add-multi-hook
+ (rainbow-mode 1)
+ '(js-mode
+   web-mode
+   php-mode
+   emacs-lisp-mode
+   python-mode))
 
 
 ;;; package.el ends here

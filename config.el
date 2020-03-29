@@ -3,7 +3,7 @@
 ;;; Commentary:
 
 ;; SETTINGS
-(load-theme 'wombat)
+(load-theme 'lrq-custom t)
  
 (setq frame-title-format "LRQ emacs")
 
@@ -14,6 +14,7 @@
 
 ;; cursor style block
 (set-default 'cursor-type 'block)
+(blink-cursor-mode nil)
 
 ;; Show current column
 (column-number-mode)

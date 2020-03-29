@@ -12,3 +12,8 @@
 
 # Except misc
 !README.md
+
+# Except theme
+!/themes/
+!/themes/*
+/themes/*.el~
