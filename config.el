@@ -1,4 +1,4 @@
-;;; package --- summaty
+;;; package --- summary
 ;;; Code:
 ;;; Commentary:
 
@@ -32,7 +32,7 @@
 
 ;; Display line numbers
 (line-number-mode 1)
-(setq display-line-numbers-type t)
+(global-display-line-numbers-mode)
 
 ;; Enable word wrap
 (global-visual-line-mode t)
@@ -59,9 +59,9 @@
           (lambda ()
             (dired-hide-details-mode)))
 	       
-;; Save sessions when closing  
-(desktop-save-mode 1)	       
-(savehist-mode 1)	       
+;; Save sessions when closing
+(desktop-save-mode 1)
+(savehist-mode 1)
 
 ;; Make yes/no prompts y/n
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -90,8 +90,7 @@
 
 ;; Custom backward kill word
 (defun dwim-backward-kill-word ()
-  "DWIM kill characters backward until encountering the beginning of a
-word or non-word."
+  "DWIM kill characters backward until encountering the beginning of a word or non-word."
   (interactive)
   (if (thing-at-point 'word) (backward-kill-word 1)
     (let* ((orig-point              (point))
@@ -114,5 +113,12 @@ word or non-word."
   (forward-char))
 
 (global-set-key (kbd "C-<backspace>") (lambda () (interactive) (dwim-backward-kill-word)))
+
+;; Set term keybinding, and bash location
+(global-set-key (kbd "C-c t") (lambda () (interactive) (term "/bin/bash")))
+
+;; Set keybind foc config folder
+(global-set-key (kbd "C-c c") (lambda () (interactive) (dired-jump nil "~/.emacs.d/")))
+
 
 ;;; config.el ends here

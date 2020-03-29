@@ -139,7 +139,7 @@
 ;; Add restart emacs
 (use-package restart-emacs
   :bind
-  ("C-c q" . (lambda () (interactive) (lrg/restart-emacs)))
+  ("C-c C-q" . (lambda () (interactive) (lrg/restart-emacs)))
   :custom
   (restart-emacs-restore-frames t))
 
@@ -148,5 +148,6 @@
   :bind
   ("M-<up>" . drag-stuff-up)
   ("M-<down>" . drag-stuff-down))
+
 
 ;;; package.el ends here
