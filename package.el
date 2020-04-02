@@ -37,6 +37,8 @@
 
 (use-package flycheck
   :hook (after-init . global-flycheck-mode)
+  :init
+  (setq flycheck-checker-error-threshold 2000)
   :custom
   (flycheck-check-syntax-automatically '(save mode-enabled)))
 
@@ -133,6 +135,17 @@
 
 (setq python-shell-interpreter "/usr/bin/python3")
 
+;; PHP mode
+;; TODO
+;; some  keybindings are borked
+(use-package php-mode
+  :bind
+  ("C-c q" . c-indent-defun)
+  ("C-c s" . c-show-syntactic-information))
+
+;; Web
+(use-package web-mode)
+
 ;; Multi cursor config
 (use-package multiple-cursors
   :bind
@@ -226,6 +239,11 @@
   (yas-global-mode t))
 
 (use-package yasnippet-snippets)
+
+;; Smartparens
+(use-package smartparens
+  :config
+  (smartparens-mode))
 
 
 ;;; package.el ends here
