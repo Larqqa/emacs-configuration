@@ -134,6 +134,7 @@
 	   
 ;; Modeline
 (use-package doom-modeline
+  :defer 0.1
   :config
   (doom-modeline-mode t))
 
@@ -148,8 +149,9 @@
 (use-package restart-emacs
   :bind
   ("C-c C-q" . (lambda () (interactive) (lrg/restart-emacs)))
-  :custom
-  (restart-emacs-restore-frames t))
+;;  :custom
+;;  (restart-emacs-restore-frames t)
+)
 
 ;; Move stuff around
 (use-package drag-stuff
@@ -159,34 +161,50 @@
 
 ;; Ivy config
 (use-package ivy
+  :defer 0.1
   :config
-  (ivy-mode 1)
+  (ivy-mode t)
   :custom
   (ivy-use-virtual-buffers t)
   (enable-recursive-minibuffers t))
 
 ;; Rainbow mode
-(use-package rainbow-mode)
+(use-package rainbow-mode
+  :hook ((js-mode . rainbow-mode)
+	 (web-mode . rainbow-mode)
+	 (php-mode . rainbow-mode)
+	 (emacs-lisp-mode . rainbow-mode)
+	 (python-mode . rainbow-mode)))
 
-;; Set Rainbow mode on globally
-;;(define-globalized-minor-mode global-rainbow-mode rainbow-mode
-;;  (lambda () (rainbow-mode 1)))
-;;(global-rainbow-mode 1)
+;; Dashboard
+(use-package dashboard
+  :init
+  (dashboard-setup-startup-hook)
+  :config
+  (setq dashboard-startup-banner 4
+        dashboard-banner-logo-title "I'm slaying, but at what cost?"
+        dashboard-center-content t
+        dashboard-set-heading-icons t
+        dashboard-set-file-icons t
+        ;; Set custom ascii art dir path
+        ;; To make new banners, add them as [number].txt, it won't read strings!
+        dashboard-banners-directory "~/.emacs.d/themes/banners/"))
 
-;; Add rainbow mode to certain modes
-(defun add-multi-hook (function hooks)
-  "Add a mode to multiple modes."
-  (mapc (lambda (hook)
-          (add-hook hook function))
-        hooks))
-
-(add-multi-hook
- (rainbow-mode 1)
- '(js-mode
-   web-mode
-   php-mode
-   emacs-lisp-mode
-   python-mode))
+;; Undo-Tree
+(use-package undo-tree
+  :config
+  (setq undo-tree-visualizer-diff t
+        undo-tree-auto-save-history t
+        undo-tree-enable-undo-in-region t
+        ;; Increase undo-limits by a factor of ten to avoid emacs prematurely
+        ;; truncating the undo history and corrupting the tree. See
+        ;; https://github.com/syl20bnr/spacemacs/issues/12110
+        undo-limit 800000
+        undo-strong-limit 12000000
+        undo-outer-limit 120000000
+        undo-tree-history-directory-alist
+        `(("." . ,"~/.emacs.d/cache/undo-tree-hist/")))
+  (global-undo-tree-mode +1))
 
 
 ;;; package.el ends here

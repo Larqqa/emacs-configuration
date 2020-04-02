@@ -16,4 +16,7 @@
 # Except theme
 !/themes/
 !/themes/*
-/themes/*.el~
+
+# And banner
+!/themes/banners/
+!/themes/banners/*
