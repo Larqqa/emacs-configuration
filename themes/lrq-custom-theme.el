@@ -121,7 +121,6 @@ are included.")
 
    ;; Line numbers
    `(line-number ((,class (:foreground "#424b5b"))))
-   `(page-break-lines ((,class (:foreground "#272c35"))))
    ))
 
 (custom-theme-set-variables

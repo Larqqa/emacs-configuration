@@ -64,31 +64,45 @@
   (dap-mode t)
   (dap-ui-mode t))
 
+;; Treemacs
 (use-package treemacs
   :bind (:map global-map
 	      ("C-x t t" . treemacs)
 	      ("C-x t 1" . treemacs-select-window))
+  :init
+  (setq treemacs-follow-after-init t
+        treemacs-is-never-other-window t
+        treemacs-sorting 'alphabetic-case-insensitive-asc
+        treemacs-persist-file "~/.emacs.d/cache/treemacs-persist"
+        treemacs-last-error-persist-file "~/.emacs.d/cache/treemacs-last-error-persist")
+  :config
+  (treemacs-follow-mode -1)
+  (treemacs-git-mode 'deferred)
   :custom
   (treemacs-resize-icons 15))
 
-;;(use-package lsp-treemacs
-;;  :bind (:map java-mode-map
-;;	      ("C-x e l" . lsp-treemacs-errors-list)
-;;	      ("C-x s l" . lsp-treemacs-symbols))
-;;  :init
-;;  (lsp-treemacs-sync-mode 1))
+(use-package treemacs-magit
+  :after treemacs magit)
 
+(use-package lsp-treemacs
+ :init
+ (lsp-treemacs-sync-mode 1))
+
+;; Company
 (use-package company
   :hook (after-init . global-company-mode)
+  :config
+  (add-to-list 'company-backends 'company-yasnippet)
   :custom
   (company-tooltip-align-annotations t)
   (company-require-match 'never)
   (company-dabbrev-downcase nil)
   (company-idle-align-annotations t)
   (company-idle-delay 0)
-  (company-minimum-prefix-length 1)
-  :bind
-  ("C-ä" . company-complete))
+  (company-minimum-prefix-length 1))
+
+;; Set company-capf as this opens the company menu on completions
+(global-set-key (kbd "C-ä") 'company-capf)
 
 (with-eval-after-load 'company
   (define-key company-active-map (kbd "C-ä") 'company-other-backend))
@@ -182,13 +196,13 @@
   (dashboard-setup-startup-hook)
   :config
   (setq dashboard-startup-banner 4
-        dashboard-banner-logo-title "I'm slaying, but at what cost?"
         dashboard-center-content t
         dashboard-set-heading-icons t
         dashboard-set-file-icons t
         ;; Set custom ascii art dir path
         ;; To make new banners, add them as [number].txt, it won't read strings!
-        dashboard-banners-directory "~/.emacs.d/themes/banners/"))
+        dashboard-banners-directory "~/.emacs.d/themes/banners/"
+        dashboard-page-separator "\n\n"))
 
 ;; Undo-Tree
 (use-package undo-tree
@@ -205,6 +219,13 @@
         undo-tree-history-directory-alist
         `(("." . ,"~/.emacs.d/cache/undo-tree-hist/")))
   (global-undo-tree-mode +1))
+
+;; Yasnippet
+(use-package yasnippet
+  :config
+  (yas-global-mode t))
+
+(use-package yasnippet-snippets)
 
 
 ;;; package.el ends here

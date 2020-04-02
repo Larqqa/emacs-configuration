@@ -8,6 +8,10 @@
 (setq frame-title-format "%b - LRQmacs"
       icon-title-format frame-title-format)
 
+;; Set initial buffer
+(setq initial-buffer-choice
+      (lambda ()
+	(get-buffer "*dashboard*")))
 
 ;;; DOOM
 
@@ -26,14 +30,14 @@
 (prefer-coding-system 'utf-8)
 (setq locale-coding-system 'utf-8)
 
-;; ;; Less noise at startup. The dashboard/empty scratch buffer is good enough.
-;; (setq inhibit-startup-message t
-;;       inhibit-startup-echo-area-message user-login-name
-;;       inhibit-default-init t
-;;       ;; Avoid pulling in many packages by starting the scratch buffer in
-;;       ;; `fundamental-mode', rather than, say, `org-mode' or `text-mode'.
-;;       initial-major-mode 'fundamental-mode
-;;       initial-scratch-message nil)
+;; Less noise at startup. The dashboard/empty scratch buffer is good enough.
+(setq inhibit-startup-message t
+      inhibit-startup-echo-area-message user-login-name
+      inhibit-default-init t
+      ;; Avoid pulling in many packages by starting the scratch buffer in
+      ;; `fundamental-mode', rather than, say, `org-mode' or `text-mode'.
+      initial-major-mode 'fundamental-mode
+      initial-scratch-message nil)
 
 
 ;; Emacs "updates" its ui more often than it needs to, so we slow it down
@@ -52,7 +56,7 @@
       desktop-dirname              (concat doom-etc-dir "desktop")
       desktop-base-file-name       "autosave"
       desktop-base-lock-name       "autosave-lock"
-;;      savehist-file                (concat doom-etc-dir "desktop/history")
+      savehist-file                (concat doom-etc-dir "desktop/history")
       pcache-directory             (concat doom-cache-dir "pcache/")
       request-storage-directory    (concat doom-cache-dir "request")
       server-auth-dir              (concat doom-cache-dir "server/")
@@ -63,7 +67,19 @@
       url-cache-directory          (concat doom-cache-dir "url/")
       url-configuration-directory  (concat doom-etc-dir "url/")
       gamegrid-user-score-file-directory (concat doom-etc-dir "games/")
-      initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+      recentf-save-file            (concat doom-local-dir "recentf")
+      mc/list-file                 (concat doom-local-dir "mc-lists.el"))
+
+;; Make dirs that error out if not exists
+(defun lrq/find-file (filename)
+  "Create parent directory if not exists while visiting file.
+FILENAME is file to check"
+  (unless (file-exists-p filename)
+    (let ((dir (file-name-directory filename)))
+      (unless (file-exists-p dir)
+        (make-directory dir t)))))
+
+(lrq/find-file (concat doom-etc-dir "desktop/history"))
 
 ;; Reduce rendering/line scan work for Emacs by not rendering cursors or regions
 ;; in non-focused windows.
