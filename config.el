@@ -68,7 +68,8 @@
       url-configuration-directory  (concat doom-etc-dir "url/")
       gamegrid-user-score-file-directory (concat doom-etc-dir "games/")
       recentf-save-file            (concat doom-local-dir "recentf")
-      mc/list-file                 (concat doom-local-dir "mc-lists.el"))
+      mc/list-file                 (concat doom-local-dir "mc-lists.el")
+      hl-highlight-save-file        (concat doom-cache-dir ".hl-save"))
 
 ;; Make dirs that error out if not exists
 (defun lrq/find-file (filename)
@@ -79,6 +80,7 @@ FILENAME is file to check"
       (unless (file-exists-p dir)
         (make-directory dir t)))))
 
+;; List of files that error out
 (lrq/find-file (concat doom-etc-dir "desktop/history"))
 
 ;; Reduce rendering/line scan work for Emacs by not rendering cursors or regions
@@ -293,38 +295,12 @@ FILENAME is file to check"
 
 (global-set-key (kbd "C-x C-c") (lambda () (interactive) (lrq/close-emacs)))
 
-;; Save and eval
-(global-set-key (kbd "C-c C-s")
+;; Save file, then eval buffer
+(global-set-key (kbd "C-c s")
                 (lambda ()
                   (interactive)
                   (save-buffer)
                   (eval-buffer)))
-
-;; Custom backward kill word
-(defun dwim-backward-kill-word ()
-  "DWIM kill characters backward until encountering the beginning of a word or non-word."
-  (interactive)
-  (if (thing-at-point 'word) (backward-kill-word 1)
-    (let* ((orig-point              (point))
-           (orig-line               (line-number-at-pos))
-           (backward-word-point     (progn (backward-word) (point)))
-           (backward-non-word-point (progn (goto-char orig-point) (backward-non-word) (point)))
-           (min-point               (max backward-word-point backward-non-word-point)))
-
-      (if (< (line-number-at-pos min-point) orig-line) (progn (goto-char min-point) (end-of-line) (delete-horizontal-space))
-        (delete-region min-point orig-point)
-        (goto-char min-point))
-      )))
-
-(defun backward-non-word ()
-  "Move backward until encountering the beginning of a non-word."
-  (interactive)
-  (search-backward-regexp "[^a-zA-Z0-9\s\n]")
-  (while (looking-at "[^a-zA-Z0-9\s\n]")
-    (backward-char))
-  (forward-char))
-
-(global-set-key (kbd "C-<backspace>") (lambda () (interactive) (dwim-backward-kill-word)))
 
 ;; Set term keybinding, and bash location
 (global-set-key (kbd "C-c t") (lambda () (interactive) (term "/bin/bash")))
@@ -340,5 +316,9 @@ FILENAME is file to check"
 
 ;; Disable page-break-lines
 (global-page-break-lines-mode nil)
+
+;; Eldoc hook
+(add-hook 'after-init 'global-eldoc-mode)
+
 
 ;;; config.el ends here

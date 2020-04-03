@@ -42,9 +42,6 @@
   :custom
   (flycheck-check-syntax-automatically '(save mode-enabled)))
 
-;;(use-package eldoc-mode
-;;  :hook (after-init . global-eldoc-mode))
-
 (use-package lsp-mode
   :commands lsp
   :custom
@@ -95,13 +92,13 @@
   :hook (after-init . global-company-mode)
   :config
   (add-to-list 'company-backends 'company-yasnippet)
-  :custom
-  (company-tooltip-align-annotations t)
-  (company-require-match 'never)
-  (company-dabbrev-downcase nil)
-  (company-idle-align-annotations t)
-  (company-idle-delay 0)
-  (company-minimum-prefix-length 1))
+  :init
+  (setq company-tooltip-align-annotations t
+        company-require-match 'never
+        company-dabbrev-downcase nil
+        company-idle-align-annotations t
+        company-idle-delay 0
+        company-minimum-prefix-length 1))
 
 ;; Set company-capf as this opens the company menu on completions
 (global-set-key (kbd "C-ä") 'company-capf)
@@ -138,10 +135,7 @@
 ;; PHP mode
 ;; TODO
 ;; some  keybindings are borked
-(use-package php-mode
-  :bind
-  ("C-c q" . c-indent-defun)
-  ("C-c s" . c-show-syntactic-information))
+(use-package php-mode)
 
 ;; Web
 (use-package web-mode)
@@ -175,7 +169,7 @@
 ;; Add restart emacs
 (use-package restart-emacs
   :bind
-  ("C-c C-q" . (lambda () (interactive) (lrg/restart-emacs)))
+  ("C-c q" . (lambda () (interactive) (lrg/restart-emacs)))
 ;;  :custom
 ;;  (restart-emacs-restore-frames t)
 )
@@ -244,6 +238,26 @@
 (use-package smartparens
   :config
   (smartparens-mode))
+
+;; Hl tosdo highlight
+(use-package hl-todo
+  :hook
+  (prog-mode . hl-todo-mode)
+  :config
+  (setq hl-todo-highlight-punctuation ":"
+        hl-todo-keyword-faces
+        `(("TODO"       warning bold)
+          ("FIXME"      error bold)
+          ("HACK"       font-lock-constant-face bold)
+          ("REVIEW"     font-lock-keyword-face bold)
+          ("NOTE"       success bold)
+          ("DEPRECATED" font-lock-doc-face bold))))
+
+;; HL selections
+(use-package hl-anything
+  :config
+  (hl-highlight-mode t)
+  (hl-paren-mode t))
 
 
 ;;; package.el ends here

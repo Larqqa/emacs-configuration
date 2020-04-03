@@ -112,15 +112,20 @@ are included.")
    ;; Company mode faces
    `(company-template-field ((,class (:foreground "#424b5b" :weight bold))))
    `(company-tooltip ((,class (:foreground "#8ac6f2" :background "#424b5b"))))
-   `(company-tooltip-common ((,class (:foreground "#95e454" :background "#424b5b" :weight bold))))
+   `(company-tooltip-common ((,class (:foreground "#95e454" :background "#424b5b"))))
    `(company-tooltip-selection ((,class (:foreground "#95e454" :weight bold))))
    `(company-scrollbar-bg ((,class (:background "#424b5b" :weight bold))))
    `(company-scrollbar-fg ((,class (:background "#cae682" :weight bold))))
    `(company-preview ((,class (:background "#8ac6f2" :weight bold))))
    `(company-preview-common ((,class (:foreground "#424b5b" :weight bold))))
+   `(company-tooltip-annotation ((,class (:foreground "#ccaa8f"))))
+   `(company-tooltip-annotation-selection ((,class (:foreground "#ccaa8f" :weight bold))))
 
    ;; Line numbers
    `(line-number ((,class (:foreground "#424b5b"))))
+
+   ;; Dashboard
+   `(dashboard-text-banner ((,class (:foreground "#8ac6f2" :weight normal))))
    ))
 
 (custom-theme-set-variables
