@@ -126,6 +126,20 @@ are included.")
 
    ;; Dashboard
    `(dashboard-text-banner ((,class (:foreground "#8ac6f2" :weight normal))))
+
+   ;; Rainbow Delimiter
+   `(rainbow-delimiters-depth-1-face ((,class (:foreground "#1df914" :weight normal))))
+   `(rainbow-delimiters-depth-2-face ((,class (:foreground "#ff6e4a" :weight normal))))
+   `(rainbow-delimiters-depth-3-face ((,class (:foreground "#e3256b" :weight normal))))
+   `(rainbow-delimiters-depth-4-face ((,class (:foreground "#45cea2" :weight normal))))
+   `(rainbow-delimiters-depth-5-face ((,class (:foreground "#ff48d0" :weight normal))))
+   `(rainbow-delimiters-depth-6-face ((,class (:foreground "#fdfc74" :weight normal))))
+   `(rainbow-delimiters-depth-7-face ((,class (:foreground "#2b6cc4" :weight normal))))
+   `(rainbow-delimiters-depth-8-face ((,class (:foreground "#17806D" :weight normal))))
+   `(rainbow-delimiters-depth-9-face ((,class (:foreground "#76ff7a" :weight normal))))
+
+   ;; hl-anything
+   ;;`( ((,class (:foreground "#76ff7a" :weight normal))))
    ))
 
 (custom-theme-set-variables

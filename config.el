@@ -320,5 +320,14 @@ FILENAME is file to check"
 ;; Eldoc hook
 (add-hook 'after-init 'global-eldoc-mode)
 
+;; Show paren mode
+(show-paren-mode t)
+(define-advice show-paren-function (:around (fn) fix)
+  "Highlight enclosing parens."
+  (cond ((looking-at-p "\\s(") (funcall fn))
+        (t (save-excursion
+             (ignore-errors (backward-up-list))
+             (funcall fn)))))
+
 
 ;;; config.el ends here

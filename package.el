@@ -133,8 +133,6 @@
 (setq python-shell-interpreter "/usr/bin/python3")
 
 ;; PHP mode
-;; TODO
-;; some  keybindings are borked
 (use-package php-mode)
 
 ;; Web
@@ -236,8 +234,8 @@
 
 ;; Smartparens
 (use-package smartparens
-  :config
-  (smartparens-mode))
+  :hook
+  (prog-mode . smartparens-mode))
 
 ;; Hl tosdo highlight
 (use-package hl-todo
@@ -255,9 +253,15 @@
 
 ;; HL selections
 (use-package hl-anything
-  :config
-  (hl-highlight-mode t)
-  (hl-paren-mode t))
+  :hook
+  (prog-mode . hl-highlight-mode)
+  ;; (prog-mode . hl-paren-mode)
+  )
+
+;; Rainbow delimiter conf
+(use-package rainbow-delimiters
+  :hook
+  (prog-mode . rainbow-delimiters-mode))
 
 
 ;;; package.el ends here
