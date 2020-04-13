@@ -64,7 +64,9 @@
       gamegrid-user-score-file-directory (concat doom-etc-dir "games/")
       recentf-save-file            (concat doom-local-dir "recentf")
       mc/list-file                 (concat doom-local-dir "mc-lists.el")
-      hl-highlight-save-file        (concat doom-cache-dir ".hl-save"))
+      hl-highlight-save-file        (concat doom-cache-dir ".hl-save")
+      
+)
 
 ;; Make dirs that error out if not exists
 (defun lrq/find-file (filename)
@@ -338,6 +340,31 @@ FILENAME is file to check"
         (t (save-excursion
              (ignore-errors (backward-up-list))
              (funcall fn)))))
+
+;; Better kill-word funcs
+(defun backward-kill-char-or-word ()
+  (interactive)
+  (cond 
+   ((looking-back (rx (char word)) 1)
+    (backward-kill-word 1))
+   ((looking-back (rx (char blank)) 1)
+    (delete-horizontal-space t))
+   (t
+    (backward-delete-char 1))))
+
+(global-set-key (kbd "<C-backspace>") 'backward-kill-char-or-word)
+
+(defun kill-char-or-word ()
+  (interactive)
+  (cond 
+   ((looking-at (rx (char word)))
+    (kill-word 1))
+   ((looking-at (rx (char blank)))
+    (delete-horizontal-space))
+   (t
+    (delete-char 1))))
+
+(global-set-key (kbd "<C-delete>") 'kill-char-or-word)
 
 
 ;;; config.el ends here

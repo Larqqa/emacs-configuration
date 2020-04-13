@@ -29,10 +29,8 @@
 ;;; Code:
 
 (deftheme lrq-custom
-  "Medium-contrast faces with a dark gray background.
-Adapted, with permission, from a Vim color scheme by Lars H. Nielsen.
-Basic, Font Lock, Isearch, Gnus, Message, and Ansi-Color faces
-are included.")
+  "My custom theme derived from Wombat.
+Added some custom faces to eg. company etc. packages.")
 
 (let ((class '((class color) (min-colors 89))))
   (custom-theme-set-faces
