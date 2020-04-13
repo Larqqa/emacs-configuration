@@ -17,11 +17,6 @@
 
 ;; These are some of the Emacs Doom configs i liked.
 
-;; Prevent the glimpse of un-styled Emacs by disabling these UI elements early.
-(push '(menu-bar-lines . 0) default-frame-alist)
-(push '(tool-bar-lines . 0) default-frame-alist)
-(push '(vertical-scroll-bars) default-frame-alist)
-
 (setq frame-inhibit-implied-resize t)
 
 ;; Define UTF-8 as the charset
@@ -268,13 +263,13 @@ FILENAME is file to check"
 ;; Maximize on startup
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-;; Hide dired details
+;; Hide dired details by default
 (add-hook 'dired-mode-hook
           (lambda ()
             (dired-hide-details-mode)))
 	       
 ;; Save desktop on close
-;; WIP
+;; TODO
 ;;(desktop-save-mode 1)
 
 ;; Save history
@@ -293,7 +288,12 @@ FILENAME is file to check"
   (if prompt
     (save-buffers-kill-emacs)))
 
-(global-set-key (kbd "C-x C-c") (lambda () (interactive) (lrq/close-emacs)))
+(global-set-key (kbd "C-x C-c") (lambda ()
+                                  (interactive)
+                                  (lrq/close-emacs)))
+
+(which-key-add-key-based-replacements
+  "C-x C-c" "Close Emacs")
 
 ;; Save file, then eval buffer
 (global-set-key (kbd "C-c s")
@@ -302,8 +302,14 @@ FILENAME is file to check"
                   (save-buffer)
                   (eval-buffer)))
 
+(which-key-add-key-based-replacements
+  "C-c s" "Save & Eval buffer")
+
 ;; Set term keybinding, and bash location
 (global-set-key (kbd "C-c t") (lambda () (interactive) (term "/bin/bash")))
+
+(which-key-add-key-based-replacements
+  "C-c t" "Open terminal")
 
 ;; Require dired-x
 (require 'dired-x)
@@ -312,7 +318,11 @@ FILENAME is file to check"
 (global-set-key (kbd "C-x d") 'dired-jump)
 
 ;; Set keybind for config folder
-(global-set-key (kbd "C-c c") (lambda () (interactive) (dired-jump nil "~/.emacs.d/")))
+(global-set-key (kbd "C-c c") (lambda () (interactive) (dired-jump nil "~/.emacs.d/custom/")))
+
+(which-key-add-key-based-replacements
+  "C-c c" "Open config dir")
+
 
 ;; Disable page-break-lines
 (global-page-break-lines-mode nil)

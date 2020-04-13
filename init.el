@@ -32,7 +32,7 @@
       '(("melpa" . "http://melpa.org/packages/")
         ("gnu" . "http://elpa.gnu.org/packages/")))
 
-(setq custom-theme-load-path '("~/.emacs.d/themes"))
+(setq custom-theme-load-path '("~/.emacs.d/custom/themes"))
 
 (package-initialize)
 
@@ -40,7 +40,7 @@
 (setq-default byte-compile-warnings nil)
 
 ;; Load user config
-(load-file "~/.emacs.d/package.el")
-(load-file "~/.emacs.d/config.el")
+(load-file "~/.emacs.d/custom/package.el")
+(load-file "~/.emacs.d/custom/config.el")
 
 ;;; init.el ends here

@@ -20,8 +20,7 @@
                 use-package-verbose t))
 
 (use-package centaur-tabs
-  :demand
-  :config
+  :init
   (centaur-tabs-mode t)
   :bind
   ("C-c <left>" . centaur-tabs-backward)
@@ -91,7 +90,7 @@
 (use-package company
   :hook (after-init . global-company-mode)
   :config
-  (add-to-list 'company-backends 'company-yasnippet)
+  (add-to-list 'company-backends 'company-yasnippet t)
   :init
   (setq company-tooltip-align-annotations t
         company-require-match 'never
@@ -167,10 +166,16 @@
 ;; Add restart emacs
 (use-package restart-emacs
   :bind
-  ("C-c q" . (lambda () (interactive) (lrg/restart-emacs)))
+  ("C-c q" . (lambda ()
+               (interactive)
+               (lrg/restart-emacs)))
 ;;  :custom
 ;;  (restart-emacs-restore-frames t)
 )
+
+;; Add which-key tag to restart emacs
+(which-key-add-key-based-replacements
+  "C-c q" "Restart Emacs")
 
 ;; Move stuff around
 (use-package drag-stuff
@@ -206,8 +211,11 @@
         dashboard-set-file-icons t
         ;; Set custom ascii art dir path
         ;; To make new banners, add them as [number].txt, it won't read strings!
-        dashboard-banners-directory "~/.emacs.d/themes/banners/"
-        dashboard-page-separator "\n\n"))
+        dashboard-banners-directory "~/.emacs.d/custom/themes/banners/"
+        dashboard-page-separator "\n\n"
+        dashboard-items '((recents   . 5)
+                          (projects  . 5)
+                          (bookmarks . 5))))
 
 ;; Undo-Tree
 (use-package undo-tree
@@ -254,14 +262,19 @@
 ;; HL selections
 (use-package hl-anything
   :hook
-  (prog-mode . hl-highlight-mode)
-  ;; (prog-mode . hl-paren-mode)
-  )
+  (prog-mode . hl-highlight-mode))
 
 ;; Rainbow delimiter conf
 (use-package rainbow-delimiters
   :hook
   (prog-mode . rainbow-delimiters-mode))
+
+;; Projectile
+(use-package projectile
+   :init
+   (projectile-mode t)
+   :bind
+   ("C-c p" . projectile-command-map))
 
 
 ;;; package.el ends here

@@ -137,9 +137,12 @@ are included.")
    `(rainbow-delimiters-depth-7-face ((,class (:foreground "#2b6cc4" :weight normal))))
    `(rainbow-delimiters-depth-8-face ((,class (:foreground "#17806D" :weight normal))))
    `(rainbow-delimiters-depth-9-face ((,class (:foreground "#76ff7a" :weight normal))))
+   `(rainbow-delimiters-mismatched-face ((,class (:foreground "#272c35" :background "#e5786d" :weight normal))))
+   `(rainbow-delimiters-unmatched-face ((,class (:foreground "#272c35" :background "#e5786d" :weight normal))))
 
-   ;; hl-anything
-   ;;`( ((,class (:foreground "#76ff7a" :weight normal))))
+   ;; Smartparen
+   `(show-paren-match ((,class (:foreground "#424b5b" :background "#76ff7a" :weight bold))))
+   `(show-paren-mismatch ((,class (:foreground "#272c35" :background "#e5786d" :weight bold))))
    ))
 
 (custom-theme-set-variables

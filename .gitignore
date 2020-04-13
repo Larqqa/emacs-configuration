@@ -5,18 +5,21 @@
 # Except self
 !.gitignore
 
-# Except config files
-!config.el
+# Except init files
+!early-init.el
 !init.el
-!package.el
 
 # Except misc
 !README.md
 
+# Custom config location
+!/custom/
+!/custom/*
+
 # Except theme
-!/themes/
-!/themes/*
+!/custom/themes/
+!/custom/themes/*
 
 # And banner
-!/themes/banners/
-!/themes/banners/*
+!/custom/themes/banners/
+!/custom/themes/banners/*
