@@ -2,22 +2,10 @@
 ;;; Code:
 ;;; Commentary:
 
-;; SETTINGS
-(load-theme 'lrq-custom t)
- 
-(setq frame-title-format "%b - LRQmacs"
-      icon-title-format frame-title-format)
-
-;; Set initial buffer
-(setq initial-buffer-choice
-      (lambda ()
-	(get-buffer "*dashboard*")))
-
 ;;; DOOM
 
-;; These are some of the Emacs Doom configs i liked.
+;; These are derived from some of the Emacs Doom configs i liked.
 
-(setq frame-inhibit-implied-resize t)
 
 ;; Define UTF-8 as the charset
 (when (fboundp 'set-charset-priority)
@@ -40,45 +28,51 @@
 (setq idle-update-delay 1)
 
 ;; Set custom paths for litter
-(defconst doom-local-dir "~/.emacs.d/local/")
-(defconst doom-etc-dir "~/.emacs.d/etc/")
-(defconst doom-cache-dir "~/.emacs.d/cache/")
+(defconst lrq-config-dir "~/.emacs.d/config/")
+(defconst lrq-local-dir "~/.emacs.d/local/")
 
-(setq abbrev-file-name             (concat doom-local-dir "abbrev.el")
-      async-byte-compile-log-file  (concat doom-etc-dir "async-bytecomp.log")
-      bookmark-default-file        (concat doom-etc-dir "bookmarks")
-      custom-file                  (concat doom-local-dir "custom.el")
-      desktop-dirname              (concat doom-etc-dir "desktop")
-      desktop-base-file-name       "autosave"
-      desktop-base-lock-name       "autosave-lock"
-      savehist-file                (concat doom-etc-dir "desktop/history")
-      pcache-directory             (concat doom-cache-dir "pcache/")
-      request-storage-directory    (concat doom-cache-dir "request")
-      server-auth-dir              (concat doom-cache-dir "server/")
-      shared-game-score-directory  (concat doom-etc-dir "shared-game-score/")
-      tramp-auto-save-directory    (concat doom-cache-dir "tramp-auto-save/")
-      tramp-backup-directory-alist backup-directory-alist
-      tramp-persistency-file-name  (concat doom-cache-dir "tramp-persistency.el")
-      url-cache-directory          (concat doom-cache-dir "url/")
-      url-configuration-directory  (concat doom-etc-dir "url/")
-      gamegrid-user-score-file-directory (concat doom-etc-dir "games/")
-      recentf-save-file            (concat doom-local-dir "recentf")
-      mc/list-file                 (concat doom-local-dir "mc-lists.el")
-      hl-highlight-save-file        (concat doom-cache-dir ".hl-save")
+(setq bookmark-default-file                (concat lrq-config-dir "bookmarks")
+      yas/yasnippet-dirs                   (concat lrq-config-dir "snippets")
+      dashboard-banners-directory          (concat lrq-config-dir "/themes/banners/")
       
+      custom-file                          (concat lrq-local-dir "custom.el")
+      auto-save-list-file-prefix           (concat lrq-local-dir "auto-save-list/.saves-")
+      desktop-base-file-name               (concat lrq-local-dir "autosave")
+      desktop-base-lock-name               (concat lrq-local-dir "autosave-lock")
+      desktop-dirname                      (concat lrq-local-dir "desktop")
+      savehist-file                        (concat lrq-local-dir "desktop/history")
+      pcache-directory                     (concat lrq-local-dir "pcache/")
+      request-storage-directory            (concat lrq-local-dir "request")
+      server-auth-dir                      (concat lrq-local-dir "server/")
+      shared-game-score-directory          (concat lrq-local-dir "shared-game-score/")
+      tramp-auto-save-directory            (concat lrq-local-dir "tramp-auto-save/")
+      tramp-backup-directory-alist         backup-directory-alist
+      tramp-persistency-file-name          (concat lrq-local-dir "tramp-persistency.el")
+      url-cache-directory                  (concat lrq-local-dir "url/")
+      url-configuration-directory          (concat lrq-local-dir "url/")
+      gamegrid-user-score-file-directory   (concat lrq-local-dir "games/")
+      recentf-save-file                    (concat lrq-local-dir "recentf")
+      mc/list-file                         (concat lrq-local-dir "mc-lists.el")
+      hl-highlight-save-file               (concat lrq-local-dir ".hl-save")
+      projectile-known-projects-file       (concat lrq-local-dir "projectile-bookmarks.eld")
+      lsp-session-file                     (concat lrq-local-dir ".lsp-session-v1")
+      anaconda-mode-installation-directory (concat lrq-local-dir "anaconda-mode")
+      treemacs-persist-file                (concat lrq-local-dir "treemacs-persist")
+      treemacs-last-error-persist-file     (concat lrq-local-dir "treemacs-last-error-persist")
+      transient-history-file               (concat lrq-local-dir "transient/history.el")
 )
 
 ;; Make dirs that error out if not exists
 (defun lrq/find-file (filename)
   "Create parent directory if not exists while visiting file.
-FILENAME is file to check"
+FILENAME is the file to check"
   (unless (file-exists-p filename)
     (let ((dir (file-name-directory filename)))
       (unless (file-exists-p dir)
         (make-directory dir t)))))
 
 ;; List of files that error out
-(lrq/find-file (concat doom-etc-dir "desktop/history"))
+(lrq/find-file (concat lrq-local-dir "desktop/history"))
 
 ;; Reduce rendering/line scan work for Emacs by not rendering cursors or regions
 ;; in non-focused windows.
@@ -206,165 +200,12 @@ FILENAME is file to check"
       make-backup-files nil
       ;; But have a place to store them in case we do use them...
       ;; auto-save-list-file-name (concat doom-cache-dir "autosave")
-      auto-save-list-file-prefix (concat doom-cache-dir "autosave/")
-      auto-save-file-name-transforms `((".*" ,(concat doom-cache-dir "autosave/") t))
-      backup-directory-alist `((".*" . ,(concat doom-cache-dir "backup/"))))
+      auto-save-list-file-prefix (concat lrq-local-dir "autosave/")
+      auto-save-file-name-transforms `((".*" ,(concat lrq-local-dir "autosave/") t))
+      backup-directory-alist `((".*" . ,(concat lrq-local-dir "backup/"))))
 
 
 ;; !DOOM
 
 
-
-;; disable menu-bar, tool-bad & scroll-bar
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-
-;; cursor style block
-(set-default 'cursor-type 'block)
-(blink-cursor-mode -1)
-
-;; Show current column
-(column-number-mode)
-
-;; Show parenthesis
-(show-paren-mode)
-
-;; global highlight line
-(global-hl-line-mode)
-(setq hl-line-sticky-flag nil
-        global-hl-line-sticky-flag nil)
-
-;; set underlining to nil
-(set-face-attribute hl-line-face nil :underline nil)
-
-;; Make window move work by arrows
-(windmove-default-keybindings)
-
-;; Display line numbers
-(line-number-mode 1)
-(global-display-line-numbers-mode)
-
-;; Enable word wrap
-(global-visual-line-mode t)
-
-;; Disable smart indent
-(setq electric-indent-mode nil)
-
-;; Use spaces as indentation
-(setq indent-tabs-mode nil)
-
-;; set default tab behaviour
-(setq c-default-style "linux"
-      c-basic-offset 4
-      c-tab-always-indent t)
-
-;; Replace selection
-(delete-selection-mode 1)
-
-;; Maximize on startup
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-
-;; Hide dired details by default
-(add-hook 'dired-mode-hook
-          (lambda ()
-            (dired-hide-details-mode)))
-	       
-;; Save desktop on close
-;; TODO
-;;(desktop-save-mode 1)
-
-;; Save history
-(savehist-mode 1)
-
-;; Make yes/no prompts y/n
-(fset 'yes-or-no-p 'y-or-n-p)
-
-;; Open buffer and focus
-(define-key global-map [remap list-buffers] 'buffer-menu-other-window)
-
-;; Close Emacs after prompt
-(defun lrq/close-emacs ()
-  "Query for closing Emacs."
-  (setq prompt (y-or-n-p "Do you really want to close Emacs? "))
-  (if prompt
-    (save-buffers-kill-emacs)))
-
-(global-set-key (kbd "C-x C-c") (lambda ()
-                                  (interactive)
-                                  (lrq/close-emacs)))
-
-(which-key-add-key-based-replacements
-  "C-x C-c" "Close Emacs")
-
-;; Save file, then eval buffer
-(global-set-key (kbd "C-c s")
-                (lambda ()
-                  (interactive)
-                  (save-buffer)
-                  (eval-buffer)))
-
-(which-key-add-key-based-replacements
-  "C-c s" "Save & Eval buffer")
-
-;; Set term keybinding, and bash location
-(global-set-key (kbd "C-c t") (lambda () (interactive) (term "/bin/bash")))
-
-(which-key-add-key-based-replacements
-  "C-c t" "Open terminal")
-
-;; Require dired-x
-(require 'dired-x)
-
-;; Dired-jump by default
-(global-set-key (kbd "C-x d") 'dired-jump)
-
-;; Set keybind for config folder
-(global-set-key (kbd "C-c c") (lambda () (interactive) (dired-jump nil "~/.emacs.d/custom/")))
-
-(which-key-add-key-based-replacements
-  "C-c c" "Open config dir")
-
-
-;; Disable page-break-lines
-(global-page-break-lines-mode nil)
-
-;; Eldoc hook
-(add-hook 'after-init 'global-eldoc-mode)
-
-;; Show paren mode
-(show-paren-mode t)
-(define-advice show-paren-function (:around (fn) fix)
-  "Highlight enclosing parens."
-  (cond ((looking-at-p "\\s(") (funcall fn))
-        (t (save-excursion
-             (ignore-errors (backward-up-list))
-             (funcall fn)))))
-
-;; Better kill-word funcs
-(defun backward-kill-char-or-word ()
-  (interactive)
-  (cond 
-   ((looking-back (rx (char word)) 1)
-    (backward-kill-word 1))
-   ((looking-back (rx (char blank)) 1)
-    (delete-horizontal-space t))
-   (t
-    (backward-delete-char 1))))
-
-(global-set-key (kbd "<C-backspace>") 'backward-kill-char-or-word)
-
-(defun kill-char-or-word ()
-  (interactive)
-  (cond 
-   ((looking-at (rx (char word)))
-    (kill-word 1))
-   ((looking-at (rx (char blank)))
-    (delete-horizontal-space))
-   (t
-    (delete-char 1))))
-
-(global-set-key (kbd "<C-delete>") 'kill-char-or-word)
-
-
-;;; config.el ends here
+;;; final.el ends here

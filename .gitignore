@@ -13,13 +13,13 @@
 !README.md
 
 # Custom config location
-!/custom/
-!/custom/*
+!/config/
+!/config/*
 
 # Except theme
-!/custom/themes/
-!/custom/themes/*
+!/config/themes/
+!/config/themes/*
 
 # And banner
-!/custom/themes/banners/
-!/custom/themes/banners/*
+!/config/themes/banners/
+!/config/themes/banners/*
