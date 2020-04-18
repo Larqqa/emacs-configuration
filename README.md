@@ -26,6 +26,9 @@ x: execute
 R: move selected to other buffer
 C-x C-q: writeable mode, for renaming stuff
 	     Once done, C-c C-c or C-x C-s to exit write mode
+         
+Commenting:
+C-x C-;: Comment or uncomment a region
 
 Centaur tabs:
 C-c <left>: move to left tab

@@ -1,8 +1,14 @@
-;;; package --- summary
-;;; Code:
+;;; final.el --- final config -*- lexical-binding: t; -*-
+
+;; Author: Larqqa
+
 ;;; Commentary:
 
-;;; DOOM
+;; These are some configs loaded last on init
+
+;;; Code:
+
+;; DOOM
 
 ;; These are derived from some of the Emacs Doom configs i liked.
 

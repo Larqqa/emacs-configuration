@@ -1,6 +1,12 @@
-;;; package --- summary -*- lexical-binding: t; -*-
-;;; Code:
+;;; init.el --- The init file -*- lexical-binding: t; -*-
+
+;; Author: Larqqa
+
 ;;; Commentary:
+
+;; This is the init file
+
+;;; Code:
 
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (setq package-check-signature nil)

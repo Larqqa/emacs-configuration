@@ -1,4 +1,12 @@
-;;; early-init.el -*- lexical-binding: t; -*-
+;;; early-init.el --- The init file -*- lexical-binding: t; -*-
+
+;; Author: Larqqa
+
+;;; Commentary:
+
+;; This is the early-init file
+
+;;; Code:
 
 ;; Emacs HEAD (27+) introduces early-init.el, which is run before init.el,
 ;; before package and UI initialization happens.

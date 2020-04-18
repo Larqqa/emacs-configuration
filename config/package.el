@@ -1,6 +1,12 @@
-;; package --- summary
-;;; Code:
+;;; package.el --- The packages -*- lexical-binding: t; -*-
+
+;; Author: Larqqa
+
 ;;; Commentary:
+
+;; This is all the packages I use in Emacs
+
+;;; Code:
 
 ;; Bootstrap use-package
 (unless (package-installed-p 'use-package)
@@ -19,13 +25,21 @@
                 use-package-always-ensure t
                 use-package-verbose t))
 
-
 ;;; ---- VERSION CONRTOL & PROJECTS ----
 
 (use-package magit
+  :defer t
   :bind
-  ("C-x g" . magit-dispatch)
-  ("C-c m" . magit-status))
+  ("C-x g" . magit-status)
+  (:map magit-status-mode-map
+        ("C-x g" . magit-dispatch)
+        ("q" . (lambda () (interactive) (magit-mode-bury-buffer 16))))
+  :config
+  ;; allow window to be split vertically rather than horizontally
+  (setq split-width-threshold 0)
+  (setq split-height-threshold nil)
+  ;; full window magit
+  (setq magit-display-buffer-function 'magit-display-buffer-fullframe-status-v1))
 
 (use-package projectile
   :demand t
@@ -89,6 +103,12 @@
                           (projects  . 5)
                           (bookmarks . 5))))
 
+(use-package default-text-scale
+  :hook (text-mode . default-text-scale-mode)
+  :bind
+  ("C--" . default-text-scale-decrease)
+  ("C-+" . default-text-scale-increase))
+
 ;;; ---- HIGHLIGHTING ----
 
 (use-package smartparens
@@ -119,6 +139,11 @@
 (use-package rainbow-mode
   :hook
   (prog-mode . rainbow-mode))
+
+(use-package highlight-indent-guides
+  :hook (prog-mode . highlight-indent-guides-mode)
+  :init
+  (setq highlight-indent-guides-method 'character))
 
 ;;; ---- QUALITY OF LIFE ----
 
@@ -170,6 +195,10 @@
         undo-tree-history-directory-alist
         `(("." . ,"~/.emacs.d/local/undo-tree-hist/"))))
 
+(use-package exec-path-from-shell
+  :demand t
+  :config
+  (exec-path-from-shell-initialize))
 
 ;;; ---- MINIBUFFER ----
 
@@ -190,13 +219,13 @@
 ;;; ---- SYNTAX CHECKING & AUTOCOMPLETION ----
 
 (use-package flycheck
-  :hook (after-init . global-flycheck-mode)
+  :hook (prog-mode . flycheck-mode)
   :init
   (setq flycheck-checker-error-threshold 2000)
   :config
   (setq-default flycheck-disabled-checkers
-              (append flycheck-disabled-checkers
-                      '(javascript-jshint json-jsonlist)))
+                (append flycheck-disabled-checkers
+                        '(javascript-jshint json-jsonlist)))
   :custom
   (flycheck-check-syntax-automatically '(save mode-enabled)))
 
@@ -217,7 +246,7 @@
 
 (use-package company
   :hook
-  (prog-mode . global-company-mode)
+  (prog-mode . company-mode)
   :config
   (add-to-list 'company-backends 'company-yasnippet t)
   :init
@@ -226,14 +255,12 @@
         company-dabbrev-downcase nil
         company-idle-align-annotations t
         company-idle-delay 0
-        company-minimum-prefix-length 1))
+        company-minimum-prefix-length 1)
+  :bind
+  ("C-ä" . company-capf)
+  (:map company-mode-map
+    ("C-ä" . company-other-backend)))
 
-;; Set company-capf as this always tries to open the company menu
-(global-set-key (kbd "C-ä") 'company-capf)
-
-;; When company is active change this to switch backends
-(with-eval-after-load 'company
-  (define-key company-active-map (kbd "C-ä") 'company-other-backend))
 
 (use-package company-lsp
   :after (company lsp-mode)
@@ -249,11 +276,14 @@
 ;;; ---- LANGUAGES ----
 
 ;; PYTHON
+
+(use-package pyvenv
+  :hook (anaconda-mode . pyvenv-mode))
+
 (use-package anaconda-mode
   :hook
   (python-mode-hook . (anaconda-mode anaconda-eldoc-mode))
   :config
-  (pyvenv-mode t)
   (use-package company-anaconda
     :hook
     (python-mode-hook . anaconda-mode)
@@ -268,8 +298,6 @@
     :init
     (eval-after-load "company"
       '(add-to-list 'company-backends '(company-ac-php-backend :with company-capf)))))
-
-
 
 ;; HTML & CSS
 (use-package web-mode
@@ -286,13 +314,12 @@
   :hook
   ((flycheck-mode-hook web-mode rjsx-mode) . add-node-modules-path))
 
-(use-package rjsx-mode
-  :mode ("\\.js\\'" "\\.jsx\\'")
-  :config
-  (add-hook 'rjsx-mode (defun my-js-mode-setup ()
-                 (flycheck-mode t)
-                 (when (executable-find "eslint")
-                   (flycheck-select-checker 'javascript-eslint)))))
 
+(use-package rjsx-mode
+  :mode ("\\.js\\'" "\\.jsx\\'"))
+
+;; JSON
+(use-package json-mode
+  :mode ("\\.json\\'"))
 
 ;;; package.el ends here

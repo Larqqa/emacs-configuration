@@ -1,8 +1,12 @@
-;;; package --- summary
-;;; Code:
+;;; config.el --- The configs -*- lexical-binding: t; -*-
+
+;; Author: Larqqa
+
 ;;; Commentary:
 
-;; SETTINGS
+;; These are all the config settings I use in Emacs
+
+;;; Code:
 
 ;; Load theme
 (load-theme 'lrq-custom t)
@@ -130,7 +134,7 @@
 (put 'dired-find-alternate-file 'disabled nil)
 
 ;; Disable page-break-lines
-(global-page-break-lines-mode nil)
+;;y(global-page-break-lines-mode nil)
 
 ;; Eldoc hook
 (add-hook 'after-init 'global-eldoc-mode)
@@ -170,6 +174,8 @@
     (delete-char 1))))
 
 (global-set-key (kbd "<C-delete>") 'kill-char-or-word)
+
+(global-set-key (kbd "C-'") 'comment-line)
 
 
 

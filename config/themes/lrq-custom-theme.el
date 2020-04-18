@@ -61,7 +61,7 @@ Added some custom faces to eg. company etc. packages.")
    `(font-lock-comment-face ((,class (:foreground "#99968b"))))
    `(font-lock-constant-face ((,class (:foreground "#e5786d"))))
    `(font-lock-function-name-face ((,class (:foreground "#cae682"))))
-   `(font-lock-keyword-face ((,class (:foreground "#8ac6f2" :weight bold))))
+   `(font-lock-keyword-face ((,class (:foreground "#8ac6f2"))))
    `(font-lock-string-face ((,class (:foreground "#95e454"))))
    `(font-lock-type-face ((,class (:foreground "#92a65e" :weight bold))))
    `(font-lock-variable-name-face ((,class (:foreground "#cae682"))))
@@ -139,14 +139,20 @@ Added some custom faces to eg. company etc. packages.")
    `(rainbow-delimiters-unmatched-face ((,class (:foreground "#272c35" :background "#e5786d" :weight normal))))
 
    ;; Smartparen
-   `(show-paren-match ((,class (:foreground "#424b5b" :background "#76ff7a" :weight bold))))
+   `(show-paren-match ((,class (:foreground "#424b5b" :background "#5fa061" :weight bold))))
    `(show-paren-mismatch ((,class (:foreground "#272c35" :background "#e5786d" :weight bold))))
+
+   ;; Js2
+   `(js2-warning ((,class (:underline (:color "#e5786d" :style wave)))))
+   `(js2-function-call ((,class (:foreground "#95e454"))))
+   `(js2-object-property ((,class (:foreground "#2b6cc4"))))
+
    ))
 
 (custom-theme-set-variables
  'lrq-custom
  '(ansi-color-names-vector ["#242424" "#e5786d" "#95e454" "#cae682"
-			    "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"]))
+			    "#8ac6f2" "#2b6cc4" "#ccaa8f" "#f6f3e8"]))
 
 (provide-theme 'lrq-custom)
 
