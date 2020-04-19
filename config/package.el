@@ -229,6 +229,10 @@
   :custom
   (flycheck-check-syntax-automatically '(save mode-enabled)))
 
+(use-package flycheck-posframe
+  :after flycheck
+  :config (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
+
 (use-package lsp-mode
   :commands lsp
   :custom

@@ -9,7 +9,7 @@
 ;;; Code:
 
 ;; Load theme
-(load-theme 'lrq-custom t)
+(load-theme 'lrq-new t)
  
 ;; Set frame title
 (setq frame-title-format "%b - LRQmacs"
