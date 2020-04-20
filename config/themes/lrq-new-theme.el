@@ -3,7 +3,6 @@
 ;; Copyright (C) 2011-2020 Free Software Foundation, Inc.
 
 ;; Author: Larqqa
-;; Original Author: Kristoffer Grönlund <krig@koru.se>
 
 ;; This file is part of GNU Emacs.
 
@@ -20,11 +19,10 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
 
-
 ;;; Commentary:
 
-;; This color theme was derived from the lovely wombat theme,
-;; and customized to my likings
+;; This color theme was birthed from my love of VSC's One Dark Pro
+;; It is a mix of Doom one/Doom material/Wombat and my own colors
 
 ;;; Code:
 
@@ -37,10 +35,6 @@ Added some custom faces to eg. company etc. packages.")
   ;; Defining some colors
   (setq
    ;; Usage: first ,(car color) secondary ,@(cdr color)
-   success    '("green")
-   error      '("red")
-   warning    '("yellow")
-   
    bg         '("#282c34" "#0F111A")
    bg-alt     '("#21242b" "#202438")
    base0      '("#1B2229" "black"  )
@@ -67,7 +61,11 @@ Added some custom faces to eg. company etc. packages.")
    magenta    '("#c678dd" "#c678dd")
    violet     '("#a9a1e1" "#a9a1e1")
    cyan       '("#46D9FF" "#46D9FF")
-   dark-cyan  '("#5699AF" "#5699AF"))
+   dark-cyan  '("#5699AF" "#5699AF")
+
+   success    green
+   error      red
+   warning    yellow)
 
    ;; bg         '("#0F111A" nil      )
    ;; bg-alt     '("#202438" nil      )
@@ -118,13 +116,14 @@ Added some custom faces to eg. company etc. packages.")
 
    ;; Font lock faces
    `(font-lock-builtin-face       ((,class (:foreground ,(car blue)))))
-   `(font-lock-comment-face       ((,class (:foreground ,(car grey)))))
+   `(font-lock-comment-face       ((,class (:foreground ,(car base6)))))
+   `(font-lock-doc-face           ((,class (:foreground ,(car base6)))))
    `(font-lock-constant-face      ((,class (:foreground ,(car red)))))
-   `(font-lock-function-name-face ((,class (:foreground ,(car yellow)))))
-   `(font-lock-keyword-face       ((,class (:foreground ,(car dark-blue)))))
-   `(font-lock-string-face        ((,class (:foreground ,(car teal)))))
+   `(font-lock-function-name-face ((,class (:foreground ,(car cyan)))))
+   `(font-lock-keyword-face       ((,class (:foreground ,(car magenta)))))
+   `(font-lock-string-face        ((,class (:foreground ,(car green)))))
    `(font-lock-type-face          ((,class (:foreground ,(car yellow) :weight bold))))
-   `(font-lock-variable-name-face ((,class (:foreground ,(car cyan)))))
+   `(font-lock-variable-name-face ((,class (:foreground ,(car yellow)))))
    `(font-lock-warning-face       ((,class (:foreground ,@(cdr red)))))
 
    ;; Button and link faces
@@ -179,8 +178,13 @@ Added some custom faces to eg. company etc. packages.")
    `(company-tooltip-annotation           ((,class (:foreground ,(car orange)))))
    `(company-tooltip-annotation-selection ((,class (:foreground ,(car orange) :weight bold))))
 
+    ;; Mode line faces
+   `(mode-line ((,class (:background ,@(cdr base4) :foreground ,(car base8)))))
+   `(mode-line-inactive ((,class (:background ,@(cdr base4) :foreground ,(car base6)))))
+   `(mode-line-highlight ((,class (:background ,(car base3)))))
+
    ;; Line numbers
-   `(line-number ((,class (:foreground ,(car base4)))))
+   `(line-number ((,class (:foreground ,(car base5)))))
 
    ;; Dashboard
    `(dashboard-text-banner ((,class (:foreground ,(car blue) :weight normal))))
@@ -207,16 +211,20 @@ Added some custom faces to eg. company etc. packages.")
 
    ;; Js2
    `(js2-warning           ((,class (:underline (:color ,@(cdr red) :style wave)))))
-   `(js2-function-param    ((,class (:foreground ,(car cyan)))))
-   `(js2-function-call     ((,class (:foreground ,(car green)))))
-   `(js2-object-property   ((,class (:foreground ,(car cyan)))))
-   `(js2-jsdoc-tag         ((,class (:foreground ,(car grey)))))
+   `(js2-function-param    ((,class (:foreground ,(car red)))))
+   `(js2-function-call     ((,class (:foreground ,(car cyan)))))
+   `(js2-object-property   ((,class (:foreground ,(car red)))))
+   `(js2-jsdoc-tag         ((,class (:foreground ,(car violet)))))
    `(js2-external-variable ((,class (:foreground ,(car yellow)))))
+   `(rjsx-attr             ((,class (:foreground ,(car yellow)))))
+   `(rjsx-tag              ((,class (:foreground ,(car red)))))
+   `(rjsx-tag-bracket-face ((,class (:foreground ,(car base8)))))
+   `(rjsx-text             ((,class (:foreground ,(car green)))))
    
    ;; CSS / SCSS
    `(css-proprietary-property ((,class (:foreground ,(car red)))))
-   `(css-property             ((,class (:foreground ,(car orange)))))
-   `(css-selector             ((,class (:foreground ,(car blue)))))
+   `(css-property             ((,class (:foreground ,(car cyan)))))
+   `(css-selector             ((,class (:foreground ,(car yellow)))))
 
    ;; Markdown
    `(markdown-markup-face ((,class (:foreground ,(car base5)))))
@@ -245,13 +253,13 @@ Added some custom faces to eg. company etc. packages.")
    `(markdown-html-tag-name-face      ((,class (:inherit 'font-lock-keyword-face))))
    
    ;; web-mode
-   `(web-mode-doctype-face           ((,class (:foreground ,(car grey)))))
-   `(web-mode-html-tag-face          ((,class (:foreground ,(car cyan)))))
+   `(web-mode-doctype-face           ((,class (:foreground ,(car base6)))))
+   `(web-mode-html-tag-face          ((,class (:foreground ,(car red)))))
    `(web-mode-html-tag-bracket-face  ((,class (:foreground ,(car cyan)))))
    `(web-mode-html-attr-name-face    ((,class (:foreground ,(car yellow)))))
    `(web-mode-html-entity-face       ((,class (:foreground ,(car cyan) :slant italic))))
    `(web-mode-block-control-face     ((,class (:foreground ,(car yellow)))))
-   `(web-mode-html-tag-bracket-face  ((,class (:foreground ,(car blue)))))
+   `(web-mode-html-tag-bracket-face  ((,class (:foreground ,(car base8)))))
    
    ;; which-key
    `(which-key-key-face                   ((,class (:foreground ,(car green)))))
@@ -277,7 +285,7 @@ Added some custom faces to eg. company etc. packages.")
    `(treemacs-git-untracked-face ((,class (:inherit 'font-lock-doc-face))))
    
    ;; ivy
-   `(ivy-current-match              ((,class (:background ,(car bg-alt) :distant-foreground nil :extend t))))
+   `(ivy-current-match              ((,class (:background ,(car bg-alt) :foreground ,(car cyan) :distant-foreground nil :extend t))))
    `(ivy-minibuffer-match-face-1    ((,class (:background nil :foreground ,(car base5) :weight light))))
    `(ivy-minibuffer-match-face-2    ((,class (:inherit 'ivy-minibuffer-match-face-1 :foreground ,(car magenta) :background ,(car base1) :weight semi-bold))))
    `(ivy-minibuffer-match-face-3    ((,class (:inherit 'ivy-minibuffer-match-face-2 :foreground ,(car green) :weight semi-bold))))
@@ -290,9 +298,9 @@ Added some custom faces to eg. company etc. packages.")
    `(ivy-modified-buffer            ((,class (:weight bold :foreground ,(car yellow)))))
    
    ;; flycheck
-   `(flycheck-error     ((,class (:underline `(:style wave :color ,(car error))))))
-   `(flycheck-warning   ((,class (:underline `(:style wave :color ,(car warning))))))
-   `(flycheck-info      ((,class (:underline `(:style wave :color ,(car success))))))
+   `(flycheck-error     ((,class (:underline (:style wave :color ,(car error))))))
+   `(flycheck-warning   ((,class (:underline (:style wave :color ,(car warning))))))
+   `(flycheck-info      ((,class (:underline (:style wave :color ,(car success))))))
    
    ;; flycheck-posframe
    `(flycheck-posframe-face            ((,class (:inherit 'default))))
@@ -314,7 +322,7 @@ Added some custom faces to eg. company etc. packages.")
    `(term-color-white   ((,class (:background ,(car base8)   :foreground ,(car base8)))))
    
    ;; dired
-   `(dired-directory  ((,class (:foreground ,(car grey)))))
+   `(dired-directory  ((,class (:foreground ,(car teal)))))
    `(dired-ignored    ((,class (:foreground ,(car grey)))))
    `(dired-flagged    ((,class (:foreground ,(car red)))))
    `(dired-header     ((,class (:foreground ,(car blue)    :weight bold))))
