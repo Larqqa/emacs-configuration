@@ -304,6 +304,8 @@
 
 ;; HTML & CSS
 (use-package web-mode
+  :mode
+  ("\\.html\\'")
   :init
   (setq web-mode-markup-indent-offset 4))
 
