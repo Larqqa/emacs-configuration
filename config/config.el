@@ -10,6 +10,10 @@
 
 ;; Load theme
 (load-theme 'lrq-new t)
+
+;; Font if windows
+(if (eq system-type 'windows-nt)
+    (set-face-attribute 'default nil :family "Consolas" :height 110))
  
 ;; Set frame title
 (setq frame-title-format "%b - LRQmacs"
