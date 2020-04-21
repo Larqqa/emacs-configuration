@@ -195,10 +195,11 @@
         undo-tree-history-directory-alist
         `(("." . ,"~/.emacs.d/local/undo-tree-hist/"))))
 
-(use-package exec-path-from-shell
-  :demand t
-  :config
-  (exec-path-from-shell-initialize))
+(if (not (eq system-type 'windows-nt))
+    (use-package exec-path-from-shell
+      :demand t
+      :config
+      (exec-path-from-shell-initialize)))
 
 ;;; ---- MINIBUFFER ----
 
