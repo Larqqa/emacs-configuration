@@ -79,7 +79,8 @@ Added some custom faces to eg. company etc. packages.")
    `(highlight           ((,class (:background ,(car base3)))))
    `(lazy-highlight      ((,class (:background ,(car base3)))))
    `(region              ((,class (:background ,(car base4) :foreground ,(car base8)))))
-   `(secondary-selection ((,class (:background ,(car dark-blue) :foreground ,(car base8)))))   `(isearch             ((,class (:background ,(car base3) :foreground ,(car base5)))))
+   `(secondary-selection ((,class (:background ,(car dark-blue) :foreground ,(car base8)))))
+   `(isearch             ((,class (:background ,(car base3) :foreground ,(car base5)))))
 
    ;; Escape and prompt faces
    `(minibuffer-prompt ((,class (:foreground ,(car red)))))
