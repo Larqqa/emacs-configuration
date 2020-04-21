@@ -48,51 +48,24 @@ Added some custom faces to eg. company etc. packages.")
    base8      '("#DFDFDF" "#dfdfdf")
    fg         '("#bbc2cf" "#bfbfbf")
    fg-alt     '("#5B6268" "#2d2d2d")
-   
-   grey       '("#5a5b5a" "#5a5a5a")
+  
    red        '("#ff6c6b" "#ff6655")
-   orange     '("#da8548" "#dd8844")
-   green      '("#98be65" "#99bb66")
    teal       '("#4db5bd" "#44b9b1")
-   yellow     '("#ECBE7B" "#ECBE7B")
    blue       '("#51afef" "#51afef")
-   ;dark-blue  '("#2257A0" "#2257A0")
-   dark-blue  '("#3575FF" "#5F87FF")
    magenta    '("#c678dd" "#c678dd")
-   violet     '("#a9a1e1" "#a9a1e1")
-   cyan       '("#46D9FF" "#46D9FF")
-   dark-cyan  '("#5699AF" "#5699AF")
-
+   grey       '("#5a5b5a" "#5a5a5a")
+   orange     '("#FF8F6E" "#FF875F")
+   green      '("#A3DB4F" "#AFD75F")
+   yellow     '("#FFCB6B" "#FFD75F")
+   dark-blue  '("#3575FF" "#5F87FF")
+   violet     '("#C792EA" "#D787D7")
+   cyan       '("#89DDFF" "#87DDFF")
+   dark-cyan  '("#3BC7FF" "#5FD7FF")
+   
    success    green
    error      red
-   warning    yellow)
-
-   ;; bg         '("#0F111A" nil      )
-   ;; bg-alt     '("#202438" nil      )
-   ;; base0      '("#0d0d0d" "black"  )
-   ;; base1      '("#1b1b1b" "#1b1b1b")
-   ;; base2      '("#212122" "#1e1e1e")
-   ;; base3      '("#292b2b" "#292929")
-   ;; base4      '("#3f4040" "#3f3f3f")
-   ;; base5      '("#5c5e5e" "#525252")
-   ;; base6      '("#757878" "#6b6b6b")
-   ;; base7      '("#969896" "#979797")
-   ;; base8      '("#ffffff" "#ffffff")
-   ;; fg         '("#c5c8c6" "#c5c5c5")
-   ;; fg-alt     '("#5B6268" "#2d2d2d")
-  
-   ;; grey       '("#5a5b5a" "#5a5a5a")
-   ;; red        '("#FF5370" "#FF5F5F")
-   ;; orange     '("#FF8F6E" "#FF875F")
-   ;; green      '("#A3DB4F" "#AFD75F")
-   ;; teal       '("#C3E88D" "#AFD787")
-   ;; yellow     '("#FFCB6B" "#FFD75F")
-   ;; blue       '("#82AAFF" "#87AFFF")
-   ;; dark-blue  '("#3575FF" "#5F87FF")
-   ;; magenta    '("#A652DE" "#AF5FD7")
-   ;; violet     '("#C792EA" "#D787D7")
-   ;; cyan       '("#89DDFF" "#87DDFF")
-   ;; dark-cyan  '("#3BC7FF" "#5FD7FF"))
+   warning    yellow
+   )
 
 
   
@@ -106,8 +79,7 @@ Added some custom faces to eg. company etc. packages.")
    `(highlight           ((,class (:background ,(car base3)))))
    `(lazy-highlight      ((,class (:background ,(car base3)))))
    `(region              ((,class (:background ,(car base4) :foreground ,(car base8)))))
-   `(secondary-selection ((,class (:background ,(car dark-blue) :foreground ,(car base8)))))
-   `(isearch             ((,class (:background ,(car base3) :foreground ,(car base5)))))
+   `(secondary-selection ((,class (:background ,(car dark-blue) :foreground ,(car base8)))))   `(isearch             ((,class (:background ,(car base3) :foreground ,(car base5)))))
 
    ;; Escape and prompt faces
    `(minibuffer-prompt ((,class (:foreground ,(car red)))))
@@ -218,7 +190,7 @@ Added some custom faces to eg. company etc. packages.")
    `(js2-external-variable ((,class (:foreground ,(car yellow)))))
    `(rjsx-attr             ((,class (:foreground ,(car yellow)))))
    `(rjsx-tag              ((,class (:foreground ,(car red)))))
-   `(rjsx-tag-bracket-face ((,class (:foreground ,(car base8)))))
+   `(rjsx-tag-bracket-face ((,class (:foreground ,(car teal)))))
    `(rjsx-text             ((,class (:foreground ,(car green)))))
    
    ;; CSS / SCSS
@@ -338,7 +310,22 @@ Added some custom faces to eg. company etc. packages.")
    `(centaur-tabs-unselected          ((,class (:background ,(car bg-alt) :foreground ,(car fg-alt)))))
    `(centaur-tabs-selected-modified   ((,class (:background ,(car bg)     :foreground ,(car teal)))))
    `(centaur-tabs-unselected-modified ((,class (:background ,(car bg-alt) :foreground ,(car teal)))))
-   
+
+   ;; PHP mode
+   `(php-function-call      ((,class (:foreground ,(car cyan)))))
+   `(php-method-call        ((,class (:foreground ,(car magenta)))))
+   `(php-string-op          ((,class (:foreground ,(car green)))))
+   `(php-variable-sigil     ((,class (:foreground ,(car blue)))))
+   `(php-variable-name      ((,class (:foreground ,(car red)))))
+   `(php-object-op          ((,class (:foreground ,(car orange)))))
+   `(php-operator           ((,class (:foreground ,(car teal)))))
+   `(php-property-name      ((,class (:foreground ,(car red)))))
+   `(php-constant           ((,class (:foreground ,(car yellow)))))
+   `(php-doc-annotation-tag ((,class (:foreground ,(car violet)))))
+   `(php-doc-$this          ((,class (:foreground ,(car yellow)))))
+   `(php-doc-$this-sigil    ((,class (:foreground ,(car yellow)))))
+   `(php-doc-class-name     ((,class (:foreground ,(car green)))))
+   `(php-doc-variable-sigil ((,class (:inherit 'php-variable-sigil))))
    ))
 
 (custom-theme-set-variables
