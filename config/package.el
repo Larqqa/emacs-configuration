@@ -287,6 +287,11 @@
 (use-package anaconda-mode
   :hook
   (python-mode-hook . (anaconda-mode anaconda-eldoc-mode))
+  (python-mode . (lambda ()
+                   ;; Start pyvenv when opening a python project
+                   ;; Expects the venv to be in /venv
+                   (interactive)
+                   (pyvenv-activate "venv")))
   :config
   (use-package company-anaconda
     :hook
