@@ -178,7 +178,8 @@ FILENAME is the file to check"
 (setq-default display-line-numbers-widen t)
 
 ;; Indentation
-(setq-default tab-width 4
+(setq-default c-basic-offset 2)
+(setq-default tab-width 2
               tab-always-indent t
               indent-tabs-mode nil
               fill-column 80)

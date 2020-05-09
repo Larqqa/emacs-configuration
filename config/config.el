@@ -24,6 +24,19 @@
       (lambda ()
 	(get-buffer "*dashboard*")))
 
+;; Less noise at startup. The dashboard/empty scratch buffer is good enough.
+(setq inhibit-startup-message t
+      inhibit-startup-echo-area-message user-login-name
+      inhibit-default-init t
+      ;; Avoid pulling in many packages by starting the scratch buffer in
+      ;; `fundamental-mode', rather than, say, `org-mode' or `text-mode'.
+      initial-major-mode 'fundamental-mode
+      initial-scratch-message nil)
+
+;; Emacs "updates" its ui more often than it needs to, so we slow it down
+;; slightly from 0.5s:
+(setq idle-update-delay 1)
+
 ;; disable menu-bar, tool-bad & scroll-bar
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -50,7 +63,7 @@
 ;; Make window move work by arrows
 (windmove-default-keybindings)
 
-;; Display line numbers
+;; Display line numbersN
 (line-number-mode 1)
 (global-display-line-numbers-mode)
 
@@ -180,6 +193,43 @@
 (global-set-key (kbd "<C-delete>") 'kill-char-or-word)
 
 (global-set-key (kbd "C-'") 'comment-line)
+
+;; ---- FILE PATHS ----
+
+;; Set custom paths for litter
+(defconst lrq-config-dir "~/.emacs.d/config/")
+(defconst lrq-local-dir "~/.emacs.d/local/")
+
+(setq bookmark-default-file                (concat lrq-config-dir "bookmarks")
+      yas/yasnippet-dirs                   (concat lrq-config-dir "snippets")
+      dashboard-banners-directory          (concat lrq-config-dir "/themes/banners/")
+      
+      custom-file                          (concat lrq-local-dir "custom.el")
+      auto-save-list-file-prefix           (concat lrq-local-dir "auto-save-list/.saves-")
+      desktop-base-file-name               (concat lrq-local-dir "autosave")
+      desktop-base-lock-name               (concat lrq-local-dir "autosave-lock")
+      desktop-dirname                      (concat lrq-local-dir "desktop")
+      savehist-file                        (concat lrq-local-dir "desktop/history")
+      pcache-directory                     (concat lrq-local-dir "pcache/")
+      request-storage-directory            (concat lrq-local-dir "request")
+      server-auth-dir                      (concat lrq-local-dir "server/")
+      shared-game-score-directory          (concat lrq-local-dir "shared-game-score/")
+      tramp-auto-save-directory            (concat lrq-local-dir "tramp-auto-save/")
+      tramp-backup-directory-alist         backup-directory-alist
+      tramp-persistency-file-name          (concat lrq-local-dir "tramp-persistency.el")
+      url-cache-directory                  (concat lrq-local-dir "url/")
+      url-configuration-directory          (concat lrq-local-dir "url/")
+      gamegrid-user-score-file-directory   (concat lrq-local-dir "games/")
+      recentf-save-file                    (concat lrq-local-dir "recentf")
+      mc/list-file                         (concat lrq-local-dir "mc-lists.el")
+      hl-highlight-save-file               (concat lrq-local-dir ".hl-save")
+      projectile-known-projects-file       (concat lrq-local-dir "projectile-bookmarks.eld")
+      lsp-session-file                     (concat lrq-local-dir ".lsp-session-v1")
+      anaconda-mode-installation-directory (concat lrq-local-dir "anaconda-mode")
+      treemacs-persist-file                (concat lrq-local-dir "treemacs-persist")
+      treemacs-last-error-persist-file     (concat lrq-local-dir "treemacs-last-error-persist")
+      transient-history-file               (concat lrq-local-dir "transient/history.el")
+)
 
 
 

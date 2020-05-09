@@ -97,7 +97,7 @@
   (setq dashboard-startup-banner 4
         dashboard-center-content t
         dashboard-set-heading-icons t
-        dashboard-set-file-icons t
+        ;dashboard-set-file-icons t
         dashboard-page-separator "\n\n"
         dashboard-items '((recents   . 5)
                           (projects  . 5)
@@ -195,11 +195,15 @@
         undo-tree-history-directory-alist
         `(("." . ,"~/.emacs.d/local/undo-tree-hist/"))))
 
-(if (not (eq system-type 'windows-nt))
-    (use-package exec-path-from-shell
-      :demand t
-      :config
-      (exec-path-from-shell-initialize)))
+;; Not needed on the Fedora install
+;; (if (not (eq system-type 'windows-nt))
+;;     (use-package exec-path-from-shell
+;;       :demand t
+;;       :config
+;;       (exec-path-from-shell-initialize)))
+
+(use-package esup
+  :commands (esup))
 
 ;;; ---- MINIBUFFER ----
 
@@ -218,6 +222,11 @@
   (enable-recursive-minibuffers t))
 
 ;;; ---- SYNTAX CHECKING & AUTOCOMPLETION ----
+(use-package yasnippet
+  :hook
+  (prog-mode . yas-global-mode))
+
+(use-package yasnippet-snippets)
 
 (use-package flycheck
   :hook (prog-mode . flycheck-mode)
@@ -271,12 +280,6 @@
   :custom
   (company-lsp-cache-candidates t))
 
-(use-package yasnippet
-  :hook
-  (prog-mode . yas-global-mode))
-
-(use-package yasnippet-snippets)
-
 ;;; ---- LANGUAGES ----
 
 ;; PYTHON
@@ -301,19 +304,18 @@
       '(add-to-list 'company-backends '(company-anaconda :with company-capf)))))
 
 ;; PHP
-(use-package php-mode
-  :config
-  (use-package company-php
-    :init
-    (eval-after-load "company"
-      '(add-to-list 'company-backends '(company-ac-php-backend :with company-capf)))))
+(use-package php-mode)
+(add-hook 'php-mode-hook
+      (lambda ()
+        (make-local-variable 'c-basic-offset)
+        (setq c-basic-offset 2)))
 
 ;; HTML & CSS
 (use-package web-mode
   :mode
   ("\\.html\\'")
   :init
-  (setq web-mode-markup-indent-offset 4))
+  (setq web-mode-markup-indent-offset 2))
 
 (use-package emmet-mode
   :hook
@@ -327,7 +329,9 @@
 
 
 (use-package rjsx-mode
-  :mode ("\\.js\\'" "\\.jsx\\'"))
+  :mode ("\\.js\\'" "\\.jsx\\'")
+  :init
+  (setq js-indent-level 2))
 
 ;; JSON
 (use-package json-mode

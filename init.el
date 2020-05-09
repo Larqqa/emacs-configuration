@@ -45,9 +45,15 @@
 ;; Byte compile warnings off
 (setq-default byte-compile-warnings nil)
 
+;; Define UTF-8 as the charset
+(when (fboundp 'set-charset-priority)
+  (set-charset-priority 'unicode))
+(prefer-coding-system 'utf-8)
+(setq locale-coding-system 'utf-8)
+
 ;; Load user config
-(load-file "~/.emacs.d/config/config.el")
 (load-file "~/.emacs.d/config/package.el")
-(load-file "~/.emacs.d/config/final.el")
+(load-file "~/.emacs.d/config/config-v2.el")
+;; (load-file "~/.emacs.d/config/final.el")
 
 ;;; init.el ends here

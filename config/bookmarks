@@ -2,7 +2,37 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("development"
+(("bash"
+ (filename . "/run/media/larqqa/Lrq Ext/bash/")
+ (front-context-string)
+ (rear-context-string . "May  1 14:09 ..\n")
+ (position . 184))
+("java"
+ (filename . "/run/media/larqqa/Lrq Ext/java/")
+ (front-context-string . "2dEngine\n  drwxr")
+ (rear-context-string . "96 May  1 10:31 ")
+ (position . 233))
+("python"
+ (filename . "/run/media/larqqa/Lrq Ext/python/")
+ (front-context-string . "pacman-in-python")
+ (rear-context-string . "56 May  1 16:20 ")
+ (position . 234))
+("webdev"
+ (filename . "/run/media/larqqa/Lrq Ext/webdev/")
+ (front-context-string)
+ (rear-context-string . "96 May  1 13:53 ")
+ (position . 341))
+("html"
+ (filename . "/var/www/html/")
+ (front-context-string . "info.php\n  lrwxr")
+ (rear-context-string . "20 May  1 15:51 ")
+ (position . 215))
+("Lrq Ext"
+ (filename . "/run/media/larqqa/Lrq Ext/")
+ (front-context-string . "$RECYCLE.BIN\n  d")
+ (rear-context-string . " 0 May  1 10:20 ")
+ (position . 228))
+("development"
  (filename . "/development/")
  (front-context-string . "python\n  drwxrwx")
  (rear-context-string . "96 Apr 14 15:18 ")
