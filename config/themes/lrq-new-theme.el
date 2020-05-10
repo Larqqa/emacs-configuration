@@ -1,3 +1,4 @@
+
 ;;; lrq-new-theme.el --- Custom face theme for Emacs
 
 ;; Copyright (C) 2011-2020 Free Software Foundation, Inc.
@@ -151,6 +152,12 @@ Added some custom faces to eg. company etc. packages.")
    `(company-tooltip-annotation           ((,class (:foreground ,(car orange)))))
    `(company-tooltip-annotation-selection ((,class (:foreground ,(car orange) :weight bold))))
 
+   ;; popup kill ringforeground
+   `(popup-face ((,class (:background ,(car bg-alt) :foreground ,(car blue)))))
+   `(popup-menu-mouse-face ((,class (:foreground ,(car base8) :background ,(car dark-cyan)))))
+   `(popup-scroll-bar-background-face ((,class (:background ,(car dark-cyan)))))
+   `(popup-scroll-bar-foreground-face ((,class (:background ,(car yellow)))))
+   
     ;; Mode line faces
    `(mode-line ((,class (:background ,@(cdr base4) :foreground ,(car base8)))))
    `(mode-line-inactive ((,class (:background ,@(cdr base4) :foreground ,(car base6)))))

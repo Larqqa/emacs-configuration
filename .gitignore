@@ -15,6 +15,7 @@
 # Custom config location
 !/config/
 !/config/*
+bookmarks
 
 # Except theme
 !/config/themes/

@@ -58,31 +58,47 @@
   ("C-c <left>" . centaur-tabs-backward)
   ("C-c <right>" . centaur-tabs-forward))
 
-(use-package treemacs
-  :bind (:map global-map
-	      ("C-x t t" . treemacs)
-	      ("C-x t 1" . treemacs-select-window))
-  :init
-  (setq treemacs-follow-after-init t
-        treemacs-is-never-other-window t
-        treemacs-sorting 'alphabetic-case-insensitive-asc)
+;; (use-package treemacs
+;;   :bind (:map global-map
+;; 	      ("C-x t t" . treemacs)
+;; 	      ("C-x t 1" . treemacs-select-window))
+;;   :init
+;;   (setq treemacs-follow-after-init t
+;;         treemacs-is-never-other-window t
+;;         treemacs-sorting 'alphabetic-case-insensitive-asc)
+;;   :config
+;;   (treemacs-follow-mode -1)
+;;   (treemacs-git-mode 'deferred)
+;;   :custom
+;;   (treemacs-resize-icons 15))
+
+;; (use-package treemacs-magit
+;;   :after treemacs magit)
+
+;; (use-package lsp-treemacs
+;;   :demand t
+;;   :config
+;;   (lsp-treemacs-sync-mode 1))
+
+(use-package neotree
+  :bind
+  ("C-x t t" . neotree-toggle)
   :config
-  (treemacs-follow-mode -1)
-  (treemacs-git-mode 'deferred)
-  :custom
-  (treemacs-resize-icons 15))
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  (setq neo-smart-open t
+        projectile-switch-project-action 'neotree-projectile-action
+        neo-window-fixed-size nil))
 
-(use-package treemacs-magit
-  :after treemacs magit)
+(use-package all-the-icons
+  :if (display-graphic-p)
+  :config
+  (unless (find-font (font-spec :name "all-the-icons"))
+    (all-the-icons-install-fonts t)))
 
-(use-package lsp-treemacs
+(use-package all-the-icons-dired
   :demand t
-  :config
-  (lsp-treemacs-sync-mode 1))
-
-(use-package all-the-icons)
-(use-package all-the-icons-dired)
-(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+  :hook
+  (dired-mode-hook . all-the-icons-dired-mode))
 
 (use-package doom-modeline
   :demand t
@@ -113,7 +129,11 @@
 
 (use-package smartparens
   :hook
-  (prog-mode . smartparens-mode))
+  (prog-mode . smartparens-mode)
+  :config
+  (sp-local-pair 'prog-mode "{" nil :post-handlers '(:add ("||\n[i]" "RET")))
+  (sp-local-pair 'prog-mode "[" nil :post-handlers '(:add ("||\n[i]" "RET")))
+  (sp-local-pair 'prog-mode "(" nil :post-handlers '(:add ("||\n[i]" "RET"))))
 
 (use-package hl-todo
   :hook
@@ -205,6 +225,9 @@
 (use-package esup
   :commands (esup))
 
+(use-package popup-kill-ring
+  :bind ("C-c b" . popup-kill-ring))
+
 ;;; ---- MINIBUFFER ----
 
 (use-package dap-mode
@@ -257,11 +280,23 @@
   (lsp-ui-flycheck-enable t)
   (lsp-ui-peek-always-show t))
 
+;; Add yasnippet support for all company backends
+;; https://github.com/syl20bnr/spacemacs/pull/179
+(defvar company-mode/enable-yas t
+  "Enable yasnippet for all backends.")
+
+(defun company-mode/backend-with-yas (backend)
+  "Add yasnippets to all backends."
+  (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
+      backend
+    (append (if (consp backend) backend (list backend))
+            '(:with company-yasnippet))))
+
 (use-package company
   :hook
   (prog-mode . company-mode)
   :config
-  (add-to-list 'company-backends 'company-yasnippet t)
+  (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
   :init
   (setq company-tooltip-align-annotations t
         company-require-match 'never
@@ -273,7 +308,6 @@
   ("C-ä" . company-capf)
   (:map company-mode-map
     ("C-ä" . company-other-backend)))
-
 
 (use-package company-lsp
   :after (company lsp-mode)

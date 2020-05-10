@@ -53,7 +53,6 @@
 
 ;; Load user config
 (load-file "~/.emacs.d/config/package.el")
-(load-file "~/.emacs.d/config/config-v2.el")
-;; (load-file "~/.emacs.d/config/final.el")
+(load-file "~/.emacs.d/config/config.el")
 
 ;;; init.el ends here
