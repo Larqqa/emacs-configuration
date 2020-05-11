@@ -316,6 +316,20 @@
        (insert "\"\"\"Brief description. \nLong description.\n\n:param \n:return \n\"\"\"\n"))
 (add-hook 'python-mode-hook (lambda () (local-set-key (kbd "C-c d") (insert-pythondoc-comment))))
 
+;; Add two spaces
+(defun lrq/insert-tab () (interactive)
+       (insert "  "))
+
+;; Remove two spaces
+(defun lrq/remove-tab () (interactive)
+       (cond
+        ((looking-back (rx "  "))
+         (backward-delete-char 2))))
+
+;; Force indents
+(global-set-key (kbd "M-§") 'lrq/insert-tab)
+(global-set-key (kbd "M-½") 'lrq/remove-tab)
+
 ;; ---- FILE PATHS ----
 
 (setq bookmark-default-file                (concat lrq-config-dir "bookmarks")
