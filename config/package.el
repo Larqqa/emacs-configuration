@@ -45,6 +45,9 @@
   :demand t
   :config
   (projectile-mode t)
+  (add-to-list 'projectile-globally-ignored-directories "*node_modules")
+  (add-to-list 'projectile-globally-ignored-directories "*build")
+  (add-to-list 'projectile-globally-ignored-directories "*vendor")
   :bind
   ("C-c p" . projectile-command-map))
 
@@ -96,9 +99,8 @@
     (all-the-icons-install-fonts t)))
 
 (use-package all-the-icons-dired
-  :demand t
-  :hook
-  (dired-mode-hook . all-the-icons-dired-mode))
+  :demand t)
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 
 (use-package doom-modeline
   :demand t
