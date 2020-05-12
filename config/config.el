@@ -309,12 +309,12 @@
 
 (defun insert-phpdoc-comment () (interactive)
        (insert "/**\n * Brief description. Long description. \n * \n * @param \n * @return \n */"))
-(add-hook 'php-mode-hook (lambda () (local-set-key (kbd "C-c d") (insert-phpdoc-comment))))
-(add-hook 'jsx-mode-hook (lambda () (local-set-key (kbd "C-c d") (insert-phpdoc-comment))))
+(add-hook 'php-mode-hook (lambda () (local-set-key (kbd "C-c d") 'insert-phpdoc-comment)))
+(add-hook 'rjsx-mode-hook (lambda () (local-set-key (kbd "C-c d") 'insert-phpdoc-comment)))
 
 (defun insert-pythondoc-comment () (interactive)
        (insert "\"\"\"Brief description. \nLong description.\n\n:param \n:return \n\"\"\"\n"))
-(add-hook 'python-mode-hook (lambda () (local-set-key (kbd "C-c d") (insert-pythondoc-comment))))
+(add-hook 'python-mode-hook (lambda () (local-set-key (kbd "C-c d") 'insert-pythondoc-comment)))
 
 ;; Add two spaces
 (defun lrq/insert-tab () (interactive)
@@ -327,8 +327,8 @@
          (backward-delete-char 2))))
 
 ;; Force indents
-(global-set-key (kbd "M-§") 'lrq/insert-tab)
-(global-set-key (kbd "M-½") 'lrq/remove-tab)
+(global-set-key (kbd "§") 'lrq/insert-tab)
+(global-set-key (kbd "½") 'lrq/remove-tab)
 
 ;; ---- FILE PATHS ----
 

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: functional React component
+# key: arrcomp
+# --
+import React from 'react';
+
+const $1 = () => {
+      return ($2);
+};
+
+export default $1

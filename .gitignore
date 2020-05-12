@@ -11,16 +11,14 @@
 
 # Except misc
 !README.md
+!/snippets/
+!/snippets/*
+!/snippets/**/*
 
 # Custom config location
 !/config/
 !/config/*
+!/config/**/*
+
+# Ignore bookmarks in config
 bookmarks
-
-# Except theme
-!/config/themes/
-!/config/themes/*
-
-# And banner
-!/config/themes/banners/
-!/config/themes/banners/*

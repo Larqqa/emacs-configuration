@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: useEffect
+# key: useff
+# --
+useEffect(() => {
+             $1
+}, [props]);

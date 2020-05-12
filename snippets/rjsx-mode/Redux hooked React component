@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Redux hooked React component
+# key: arrcompredux
+# --
+import React from 'react';
+import { connect } from 'react-redux';
+import ReactMarkdown from 'react-markdown';
+
+const $1 = ({ $2 }) => {
+  return (
+         <h1>Hola mundo!</h1>
+  );
+};
+
+export default connect(
+  state => {
+    return {
+      $2: state.$2
+    };
+  }
+)( $1 );

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: useState
+# key: usta
+# --
+const [ $1, $2] = useState($3);

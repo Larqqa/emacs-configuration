@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: arrowfunction
+# key: arrow
+# --
+const $1 = () => {
+      $2
+}
